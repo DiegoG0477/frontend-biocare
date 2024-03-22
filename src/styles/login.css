@@ -1,0 +1,78 @@
+.login-container{
+  background: round;
+  /* background-image: url("./src/assets/img/fondoLogin.png"); */
+  display: flex;
+  justify-content: stretch;
+  height: 100vh;
+  
+  background-color: #3A3B3C;
+  background-blend-mode: overlay;
+}
+
+#logo-container {
+  background-color: rgba(10, 34, 98, 0.33);
+  align-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+#form-container {
+  margin: auto;
+  color: white;
+}
+
+#logo-image{
+  margin: auto;
+  display: flex;
+
+}
+
+.login-title{
+  vertical-align: center;
+  place-content: center;
+  text-align: center;
+  margin-bottom: 10vh;
+}
+
+#title-login{
+  font-size: 50px;
+  font-family: "Arial Black";
+}
+
+.login-form{
+  display: block;
+  margin:auto;
+}
+
+.login-inputs {
+  display: grid;
+  margin-outside: 20px;
+  margin:auto;
+}
+
+label {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+#signin{
+  float: right;
+}
+#forgot{
+  background: red;
+  float: left;
+}
+#forgot:hover{
+  color: #061f64;
+}
+a {
+  font-size: large;
+}
+.buttons{
+  display:block;
+}
+
+.forgot-password{
+  display: block;
+  margin: auto;
+  margin-top: -15vh;
+}

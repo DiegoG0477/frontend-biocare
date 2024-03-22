@@ -1,0 +1,78 @@
+.view-component{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #363431;
+    height: 100vh;
+}
+
+.help-container{
+    height: 86%;
+    width: 90%;
+    background-color: #F9E8C9;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 15px;
+    padding: 2.5%;
+}
+
+.alert-container{
+    display: flex;
+    flex-flow: nowrap row;
+    text-align: center;
+}
+.recommendations-container{
+    display: flex;
+    flex-flow: nowrap row;
+    text-align: center;
+}
+#exit-button{
+    background-color:black;
+    color: white;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    border-radius: 50px;
+    margin-top: -5%;
+}
+.btn-container{
+    align-self: flex-end;
+    display: grid;
+    /* margin-bottom: 90px;
+    margin-right: 90px; */
+}
+.header{
+    display: flex;
+    color: #061f64;
+    font-weight: bold;
+    font-size: 1.8em;
+}
+#red-alert{
+    margin: 20px 0 20px 0;
+}
+
+#yellow-alert{
+    margin: 20px 0 20px 0;
+}
+
+#green-alert{
+    margin: 20px 0 20px 0;
+}
+
+.details{
+    font-size: 0.9em;
+}
+
+.alert-label{
+    /* font-weight: 700; */
+    margin-top: 4%;
+    font-size: 1.1em;
+    text-align: center;
+    font-weight: bold;
+}
+
+.medical-equipment{
+    margin-bottom: 4%;
+    height: 3.5em;
+}

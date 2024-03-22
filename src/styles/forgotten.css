@@ -1,0 +1,89 @@
+.forgot-container {
+    background: round;
+    background-image: url("./src/assets/img/fondoLogin.png");
+    display: flex;
+    justify-content: stretch;
+    height: 100vh;
+    background-color: #3a3b3c;
+    background-blend-mode: overlay;
+}
+
+#logo-container {
+    background-color: rgba(10, 34, 98, 0.33);
+    align-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+#form-container {
+    margin: auto;
+    color: white;
+}
+
+#logo {
+    image: url("./src/assets/img/logoBiocare.png");
+    margin: auto;
+    display: flex;
+}
+
+.forgot-title {
+    vertical-align: center;
+    place-content: center;
+    text-align: center;
+    margin-bottom: 10vh;
+}
+
+#title-forgot {
+    font-size: 50px;
+    font-family: "Arial Black";
+}
+
+.forgot-form {
+    display: block;
+    margin: auto;
+}
+
+.forgot-inputs {
+    display: grid;
+    justify-content: center;
+    margin: auto;
+}
+
+label {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+input {
+    padding: 20px;
+    width: 25vw;
+}
+
+button {
+    background-color: rgba(168, 218, 220, 0.32);
+    border: none;
+    margin: 100px 2px 2px 2px;
+    padding: 12px;
+    color: white;
+}
+#signin {
+    float: right;
+}
+#forgot {
+    margin-top: 24px;
+    float: left;
+}
+#forgot:hover {
+    color: #061f64;
+}
+
+a {
+    font-size: large;
+}
+
+
+.buttons {
+    margin-top: -10%;
+    display: flex;
+    justify-content: space-around;
+}

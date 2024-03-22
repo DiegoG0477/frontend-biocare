@@ -1,0 +1,39 @@
+/* .non-user-container{
+    background: blue;
+    height: 50vh;
+} */
+
+.non-user-container{
+    align-items: stretch;
+    background: round;
+    background-image: url("./src/assets/img/fondoLogin.png");
+    display: flex;
+    justify-content: stretch;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #3A3B3C;
+    background-blend-mode: overlay;
+}
+#logo-container {
+    background-color: rgba(10, 34, 98, 0.33);
+    align-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+#form-container {
+    margin: auto;
+    color: white;
+}
+#logo{
+    margin: auto;
+    display: flex;
+
+}
+
+.login-title{
+    vertical-align: center;
+    place-content: center;
+    text-align: center;
+    margin-bottom: 10vh;
+}

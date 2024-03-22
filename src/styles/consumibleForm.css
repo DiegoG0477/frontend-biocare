@@ -1,0 +1,11 @@
+.priority-button{
+    color: black;
+    margin: auto;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 20px;
+    background-color: #D9D9D9;
+}
+#consumible-nombre-input{
+    margin-left: 20px;
+}
