@@ -1,7 +1,7 @@
-import { Routes, Route } from 'react-router-dom'
-import { Menu } from './routes/Dashboard-Home.jsx'
-import { Principal } from './routes/Preguntas/Principal.jsx'
-import Home from './layout/Home.jsx'
+import { Routes, Route } from 'react-router-dom';
+import { Menu } from './routes/Dashboard-Home.jsx';
+import { Principal } from './routes/Preguntas/Principal.jsx';
+import Home from './layout/Home.jsx';
 import LoginForm from "./components/LoginForm.jsx";
 import RegisterForm from "./components/RegisterForm.jsx";
 import ForgottenPasswordForm from "./components/ForgottenPasswordForm.jsx";
@@ -11,7 +11,7 @@ import Emergencia from "./components/Emergencia.jsx";
 import DefaultLayout from "./layout/Default.layout.jsx";
 import InventarioUsuarios from "./components/InventarioUsuarios.jsx";
 import Reportes from "./components/Reportes.jsx";
-import './styles/main.css'
+import './styles/main.css';
 
 function App() {
     return (

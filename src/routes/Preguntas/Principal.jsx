@@ -2,21 +2,24 @@ import { useEffect, useState } from "react";
 import useCustomNav from "../../helpers/hooks/useCustomNav.js";
 import { Button } from "primereact/button";
 import "../../styles/main/solicitudes.css";
-
-import Navbar from "../../components/Navbar.jsx";
+import { sendReport } from "../../services/api/reportService.js";
+import { getLastPdfId } from "../../services/api/pdfService.js";
+import { setItem } from "../../services/storage/localStorageService.js";
 import BoxContainer from "../../components/BoxContainer.jsx";
 import AreaBoxes from "../../components/Boxes/Mantenimiento/AreaBoxes.jsx";
 import MainBox from "../../components/Boxes/Main.jsx";
 import { useNavigate } from "react-router-dom";
 import SOSButton from "../../components/SOSButton.jsx";
 
+
 export const Principal = () => {
     const [selection, setSelection] = useState(null);
     const [title, setTitle] = useState("Solicitudes");
     const [formPage, setFormPage] = useState(1);
     const [cantPages, setCantPages] = useState(2);
+    const [descripcion, setDescripcion] = useState("");
     
-    const { handleNavRefreshTo } = useCustomNav();
+    const { handleNavRefreshTo, handleNewTabTo } = useCustomNav();
 
     function customSetSelection(number) {
         setSelection(number);
@@ -27,11 +30,22 @@ export const Principal = () => {
         console.log(formPage);
     };
 
-    const navigate = useNavigate();
-
-    const handleSendData = () => {
-
+    const handleReloadPages = () => {
+        setSelection(null);
+        setFormPage(1);
     }
+
+    const sendReportToApi = async () => {
+        setItem("descripcion", descripcion);
+        await sendReport(selection);
+
+        const lastReportId = await getLastPdfId();
+
+        handleNavRefreshTo("/main");
+
+        handleNewTabTo("http://localhost:4000/reportes/pdf/" + lastReportId);
+    }
+    
 
     useEffect(() => {
         if (selection == 1) setTitle("Accesorios y Consumibles");
@@ -49,6 +63,7 @@ export const Principal = () => {
                             selectedOption={selection}
                             page={formPage}
                             setCantPages={setCantPages}
+                            setDescripcion={setDescripcion}
                         />
                     ) : (
                         <BoxContainer
@@ -68,9 +83,7 @@ export const Principal = () => {
                     <div className="button-container">
                         <Button
                             label={"Cancelar"}
-                            onClick={() => {
-                                setSelection(null);
-                            }}
+                            onClick={handleReloadPages}
                             style={{
                                 backgroundColor: "black",
                                 margin: "auto",
@@ -113,7 +126,7 @@ export const Principal = () => {
                                 borderRadius: "20px",
                                 width: "10rem",
                             }}
-                            onClick={() => handleNavRefreshTo('/main')}
+                            onClick={sendReportToApi}
                         />{" "}
                     </div>
                 ) : (

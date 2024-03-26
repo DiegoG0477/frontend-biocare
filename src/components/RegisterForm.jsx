@@ -2,37 +2,33 @@ import useCustomNav from "../helpers/hooks/useCustomNav.js";
 import "../styles/register.css";
 import CustomInput from "./CustomInput.jsx";
 import { useState } from "react";
+import { register } from "../services/auth/authService.js";
 
 export default function RegisterForm() {
     const [nombre, setNombre] = useState(null);
     const [apellidoPaterno, setApellidoPaterno] = useState(null);
     const [apellidoMaterno, setApellidoMaterno] = useState(null);
-    const [hospital, setHospital] = useState(null);
+    const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
 
-    const { handleBackNav } = useCustomNav();
+    const { handleBackNav, handleNavTo } = useCustomNav();
 
-    const register = () => {
-        fetch("http://localhost:4000/usuarios/registro", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                nombre: nombre,
-                apellidoPaterno: apellidoPaterno,
-                apellidoMaterno: apellidoMaterno,
-                hospital: hospital,
-                password: password,
-            }),
-        })
-            .then((res) => res.json())
-            .then((r) => {
-                if (r) {
-                    window.alert(r);
-                } else window.alert(r.message);
-            })
-            .catch((e) => window.alert(e));
+    const handleRegister = async () => {
+        const data = {
+            nombre: nombre,
+            apellidoPaterno: apellidoPaterno,
+            apellidoMaterno: apellidoMaterno,
+            correo: email,
+            password: password,
+            rol: "user",
+        };
+
+        const response = await register(data);
+
+        if (response) {
+            console.log(response);
+            handleNavTo("/login");
+        }
     };
 
     return (
@@ -67,10 +63,10 @@ export default function RegisterForm() {
                 />
                 <CustomInput
                     id={"hospital"}
-                    label={"Hospital perteneciente"}
+                    label={"Correo"}
                     type={"text"}
                     onChange={(e) => {
-                        setHospital(e.target.value);
+                        setEmail(e.target.value);
                     }}
                 />
                 <CustomInput
@@ -95,7 +91,7 @@ export default function RegisterForm() {
                 <button
                     id={"submit-form"}
                     onClick={() => {
-                        register();
+                        handleRegister();
                     }}
                 >
                     Registrarse

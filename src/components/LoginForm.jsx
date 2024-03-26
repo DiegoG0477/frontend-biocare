@@ -1,44 +1,42 @@
+import useCustomNav from "../helpers/hooks/useCustomNav";
 import "../styles/login.css";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-export default function LoginForm() {
-    const [username, setUsername] = useState(null);
-    const [password, setPassword] = useState(null);
+import { login } from "../services/auth/authService";
 
-    const login = (evt, username, password) => {
-        console.log(`${username} Con ${password} se esta logueando`);
-        const authenticate = fetch("http://localhost:4000/usuarios/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                correo: username,
-                password: password,
-            }),
-        })
-            .then((res) => res.json())
-            .then((r) => {
-                if (r.usuario) navigate("/main");
-                else window.alert(r.message);
-            })
-            .catch((e) => window.alert(e));
-        //navigate('/main')
-    };
-    const navigate = useNavigate();
+export default function LoginForm() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const { handleNavTo } = useCustomNav();
+
+    const handleLogin = async () => {
+        const data = {
+            correo: email,
+            password: password,
+        };
+
+        const response = await login(data);
+
+        if (response) {
+            console.log(response);
+
+            handleNavTo("/main");
+        }
+    }
+
     return (
         <div className={"login-form"}>
             <div className={"login-title"}>
                 <h1 id={"title-login"}>Inicia sesión</h1>
             </div>
             <div className={"login-inputs"}>
-                <label htmlFor={"user"}>Usuario</label>
+                <label htmlFor={"user"}>Correo</label>
                 <input
                     type={"text"}
                     id={"user"}
                     onChange={(e) => {
                         console.log(e.target.value);
-                        setUsername(e.target.value);
+                        setEmail(e.target.value);
                     }}
                 />
                 <label htmlFor={"password-input"}>Contraseña</label>
@@ -57,8 +55,8 @@ export default function LoginForm() {
                 <button
                     id={"signin"}
                     type={"submit"}
-                    onClick={(evt) => {
-                        login(evt, username, password);
+                    onClick={() => {
+                        handleLogin();
                     }}
                 >
                     Ingresar
@@ -77,7 +75,7 @@ export default function LoginForm() {
                 <button
                     style={{ backgroundColor: "rgba(0,0,0,0)" }}
                     onClick={() => {
-                        navigate("/recuperar-password");
+                        handleNavTo("/recuperar-password");
                     }}
                 >
                     ¿Olvidó su contraseña?

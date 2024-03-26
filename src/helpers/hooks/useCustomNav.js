@@ -16,7 +16,11 @@ const useCustomNav = () =>{
         // window.location.reload();
     }
 
-    return { handleBackNav, handleNavTo, handleNavRefreshTo };
+    const handleNewTabTo = (route) => {
+        window.open(route, '_blank');
+    }
+
+    return { handleBackNav, handleNavTo, handleNavRefreshTo, handleNewTabTo };
 }
 
 export default useCustomNav;

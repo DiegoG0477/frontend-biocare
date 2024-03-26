@@ -1,17 +1,23 @@
 import { useEffect } from "react";
-import CustomInput from "../../CustomInput.jsx";
+import { setItem, getItem, removeItem } from "../../../services/storage/localStorageService.js";
 import { Button } from "primereact/button";
+import CustomInput from "../../CustomInput.jsx";
 import "../../../styles/consumibleForm.css";
 import { areasList } from "../../../helpers/data/areasList.js";
 import { consumiblesList } from "../../../helpers/data/consumiblesList.js";
 import IconDataCard from "../../IconDataCard.jsx";
 import "../../../styles/main/solicitudes.css";
 
-export default function Consumibles({ page, setCantPages }) {
+export default function Consumibles({ page, setCantPages, setDescripcion }) {
+
     useEffect(() => {
         setCantPages(consumiblesViews.length);
         console.log("consumiblesViews.length", consumiblesViews.length);
     }, []);
+
+    const descriptionChange = (value) => {
+        return setDescripcion(value);
+    }
 
     const highPriority = () => {
         return (
@@ -96,7 +102,7 @@ export default function Consumibles({ page, setCantPages }) {
                 ) : (
                     <div className="option-boxes-div">
                         {consumiblesList.map((consumible) => (
-                            <IconDataCard key={consumible.key} img={consumible.img} name={consumible.name} />
+                            <IconDataCard key={consumible.key} img={consumible.img} name={consumible.name} onClick={() => setItem('consumibleSolicitado', consumible.name)} />
                         ))}
                     </div>
                 )}
@@ -114,7 +120,7 @@ export default function Consumibles({ page, setCantPages }) {
                 ) : (
                     <div className="option-boxes-div">
                         {areasList.map((area) => (
-                            <IconDataCard key={area.key} img={area.img} name={area.name} />
+                            <IconDataCard key={area.key} img={area.img} name={area.name} onClick={() => setItem('areaSolicitante', area.name)} />
                         ))}
                     </div>
                 )}
@@ -124,17 +130,25 @@ export default function Consumibles({ page, setCantPages }) {
         (<div key={3} className="form-view">
             <h2>3. ¿Cuál es el nivel de prioridad?</h2>
             <div className="option-boxes-div">
-                <Button className={"priority-button"}>{highPriority()} </Button>
-                <Button className={"priority-button"}>{medPriority()}</Button>
-                <Button className={"priority-button"}>{lowPriority()}</Button>
+                <Button className={"priority-button"} onClick={() => setItem('prioridad', 'Alta')}>{highPriority()} </Button>
+                <Button className={"priority-button"} onClick={() => setItem('prioridad', 'Media')}>{medPriority()}</Button>
+                <Button className={"priority-button"} onClick={() => setItem('prioridad', 'Baja')}>{lowPriority()}</Button>
             </div>
         </div>),
 
+        // (<div key={4} className="form-view">
+        //     <h2>4. ¿En qué estado se encuentra el equipo?</h2>
+        //     <div className="option-boxes-div">
+        //         <Button className={"priority-button"}>{activeMed()} </Button>
+        //         <Button className={"priority-button"}>{inactiveMed()}</Button>
+        //     </div>
+        // </div>),
+
         (<div key={4} className="form-view">
-            <h2>4. ¿En qué estado se encuentra el equipo?</h2>
-            <div className="option-boxes-div">
-                <Button className={"priority-button"}>{activeMed()} </Button>
-                <Button className={"priority-button"}>{inactiveMed()}</Button>
+            <h3>4. Escriba una descripción del reporte agregando más detalles</h3>
+            <div>
+                <CustomInput type={'text'} label={'Detalles: '} id={'equipo-detalles-mantenimiento'}
+                            onChange={(e) => descriptionChange(e.target.value)}/>
             </div>
         </div>),
     ];

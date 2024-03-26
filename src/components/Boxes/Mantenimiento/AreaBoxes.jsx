@@ -1,25 +1,26 @@
 import { useState, useEffect } from "react";
-import CustomInput from "../../CustomInput.jsx";
 import { Button } from "primereact/button";
+import CustomInput from "../../CustomInput.jsx";
+import { setItem } from "../../../services/storage/localStorageService.js";
 import accesorio from '../../../assets/Iconos/image 14.png'
 import bad from '../../../assets/Iconos/image 13.png'
 import alarma from '../../../assets/Iconos/image 12.png'
 import { areasList } from "../../../helpers/data/areasList.js";
 import { medEquiposList } from "../../../helpers/data/medEquiposList.js";
+import IconDataCard from "../../IconDataCard.jsx";
 
 import "../../../styles/main/solicitudes.css";
 
 
-export default function AreaBoxes({ page, setCantPages }) {
-    const [nombre, setNombre] = useState(null)
+export default function AreaBoxes({ page, setCantPages, setDescripcion }) {
 
     useEffect(() => {
-        setCantPages(consumiblesViews.length);
-        console.log("consumiblesViews.length", consumiblesViews.length);
+        setCantPages(mantenimientoViews.length);
+        console.log("mantenimientoViews.length", mantenimientoViews.length);
     }, []);
 
-    const nameChange = (value) => {
-        return setNombre(value);
+    const descriptionChange = (value) => {
+        return setDescripcion(value);
     }
 
     const highPriority = () => {
@@ -82,7 +83,7 @@ export default function AreaBoxes({ page, setCantPages }) {
         )
     }
 
-    const consumiblesViews = [
+    const mantenimientoViews = [
         (<div key={1} className="form-view">
             <h2>1. ¿En qué área se solicita el mantenimiento?</h2>
             <div>
@@ -93,15 +94,7 @@ export default function AreaBoxes({ page, setCantPages }) {
                 ) : (
                     <div className="option-boxes-div">
                         {areasList.map((area) => (
-                            <div key={area.key} className="icon-data-card">
-                                <div className="icon-box">
-                                    <img src={area.img} alt="" />
-                                </div>
-
-                                <div className="text-box">
-                                    <p>{area.name}</p>
-                                </div>
-                            </div>
+                            <IconDataCard key={area.key} img={area.img} name={area.name} onClick={() => setItem('areaSolicitante', area.name)} />
                         ))}
                     </div>
                 )}
@@ -112,37 +105,37 @@ export default function AreaBoxes({ page, setCantPages }) {
             <h2>2. ¿Qué tipo de equipo médico desea reportar?</h2>
             <div className="equipos-list">
                 {medEquiposList.map((equipo) => (
-                    <div key={equipo.key} className="icon-data-card">
-                        <div className="icon-box">
-                            <img src={equipo.img} alt="" />
-                        </div>
-
-                        <div className="text-box">
-                            <p>{equipo.name}</p>
-                        </div>
-                    </div>
+                    <IconDataCard key={equipo.key} img={equipo.img} name={equipo.name} onClick={() => setItem('tipoEquipoReportado', equipo.name)} />
                 ))}
             </div>
         </div>),
 
-        (<div key={4} className="form-view">
+        (<div key={3} className="form-view">
             <h2>3. ¿En qué estado se encuentra el equipo?</h2>
             <div className="option-boxes-div">
-                <Button className={"priority-button"}>{badFunction()} </Button>
-                <Button className={"priority-button"}>{badStatus()}</Button>
-                <Button className={"priority-button"}>{alarm()}</Button>
+                <Button className={"priority-button"}  onClick={() => setItem('falloReportado', 'no enciende')}>{badFunction()} </Button>
+                <Button className={"priority-button"} onClick={() => setItem('falloReportado', 'mal estado')}>{badStatus()}</Button>
+                <Button className={"priority-button"} onClick={() => setItem('falloReportado', 'alarma')}>{alarm()}</Button>
+            </div>
+        </div>),
+
+        (<div key={4} className="form-view">
+            <h2>4. ¿Cuál es el nivel de prioridad?</h2>
+            <div className="option-boxes-div">
+                <Button className={"priority-button"} onClick={() => setItem('prioridad', 'Alta')}>{highPriority()} </Button>
+                <Button className={"priority-button"} onClick={() => setItem('prioridad', 'Alta')}>{medPriority()}</Button>
+                <Button className={"priority-button"} onClick={() => setItem('prioridad', 'Alta')}>{lowPriority()}</Button>
             </div>
         </div>),
 
         (<div key={5} className="form-view">
-            <h2>4. ¿Cuál es el nivel de prioridad?</h2>
-            <div className="option-boxes-div">
-                <Button className={"priority-button"}>{highPriority()} </Button>
-                <Button className={"priority-button"}>{medPriority()}</Button>
-                <Button className={"priority-button"}>{lowPriority()}</Button>
+            <h3>5. Escriba una descripción del reporte agregando más detalles</h3>
+            <div>
+                <CustomInput type={'text'} label={'Detalles: '} id={'equipo-detalles-mantenimiento'}
+                            onChange={(e) => descriptionChange(e.target.value)}/>
             </div>
         </div>),
     ];
 
-    return consumiblesViews[page - 1];
+    return mantenimientoViews[page - 1];
 }

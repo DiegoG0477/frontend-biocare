@@ -14,6 +14,8 @@ import aspiradorSecrecionesImg from '../../assets/Iconos/aspirador-secreciones.p
 import signosVitalesImg from '../../assets/Iconos/monitor-signos-vitales.png';
 import cunaTermicaImg from '../../assets/Iconos/cuna-termica.png';
 
+//manda a llamar la lista de la BDD
+
 export const medEquiposList = [
     { key:1, name: "Arco en C", img: arcoImg },
     { key:2, name: "Desfibrilador", img: desfibriladorImg },
