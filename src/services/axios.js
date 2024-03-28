@@ -1,7 +1,10 @@
 import axios from "axios";
+import { getToken } from "./storage/localStorageService";
 
-const apiGet = async (url, token) => {
+const apiGet = async (url) => {
     try {
+        const token = getToken();
+
         const response = await axios.get(url, {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -13,12 +16,31 @@ const apiGet = async (url, token) => {
     }
 };
 
-const apiPost = async (url, data, token) => {
+const apiGetDocument = async (url) => {
+    try {
+        const token = getToken();
+
+        const response = await axios.get(url, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/pdf'
+            },
+            responseType: 'blob'
+        });
+        return response;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+const apiPost = async (url, data) => {
     try {
         if (url === "http://localhost:4000/auth/login" || url === "http://localhost:4000/auth/registro") {
             const response = await axios.post(url, data);
             return response;
         }
+
+        const token = getToken();
 
         const response = await axios.post(url, data, {
             headers: {
@@ -29,6 +51,7 @@ const apiPost = async (url, data, token) => {
         return response;
     } catch (error) {
         console.error(error);
+        throw error;
     }
 };
 
@@ -58,4 +81,4 @@ const apiDelete = async (url, token) => {
     }
 };
 
-export { apiGet, apiPost, apiPut, apiDelete };
+export { apiGet, apiPost, apiPut, apiDelete, apiGetDocument };

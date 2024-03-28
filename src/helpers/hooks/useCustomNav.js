@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
+// En tu archivo useCustomNav.js
 const useCustomNav = () =>{
     const navigation = useNavigate();
 

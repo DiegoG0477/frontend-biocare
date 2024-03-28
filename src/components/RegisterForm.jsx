@@ -27,7 +27,7 @@ export default function RegisterForm() {
 
         if (response) {
             console.log(response);
-            handleNavTo("/login");
+            handleNavTo("/");
         }
     };
 

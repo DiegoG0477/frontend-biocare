@@ -6,9 +6,7 @@ import { sendReport } from "../../services/api/reportService.js";
 import { getLastPdfId } from "../../services/api/pdfService.js";
 import { setItem } from "../../services/storage/localStorageService.js";
 import BoxContainer from "../../components/BoxContainer.jsx";
-import AreaBoxes from "../../components/Boxes/Mantenimiento/AreaBoxes.jsx";
 import MainBox from "../../components/Boxes/Main.jsx";
-import { useNavigate } from "react-router-dom";
 import SOSButton from "../../components/SOSButton.jsx";
 
 

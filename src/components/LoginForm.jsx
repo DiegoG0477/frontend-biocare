@@ -6,7 +6,6 @@ import { login } from "../services/auth/authService";
 export default function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
     const { handleNavTo } = useCustomNav();
 
     const handleLogin = async () => {
@@ -64,7 +63,7 @@ export default function LoginForm() {
 
                 <button
                     onClick={() => {
-                        navigate("/registrar");
+                        handleNavTo("/registrar");
                     }}
                 >
                     Registrarse

@@ -58,28 +58,6 @@ export default function Consumibles({ page, setCantPages, setDescripcion }) {
         );
     };
 
-    const activeMed = () => {
-        return(
-            <>
-                <svg width={100} height={100}>
-                    <circle cx={50} cy={50} r={40} fill={"#63DD58"} />
-                </svg>
-                <p>{"ACTIVO"}</p>
-            </>
-        );
-    }
-
-    const inactiveMed = () => {
-        return(
-            <>
-                <svg width={100} height={100}>
-                    <circle cx={50} cy={50} r={40} fill={"#ED5210"} />
-                </svg>
-                <p>{"INACTIVO"}</p>
-            </>
-        )
-    }
-
     // la logica sera la siguiente
     // manejar un useState de las id's de los divs dependiendo de cada pantalla
     //cada div, tendra un id que sera modificado desde el componente padre cuando
@@ -135,14 +113,6 @@ export default function Consumibles({ page, setCantPages, setDescripcion }) {
                 <Button className={"priority-button"} onClick={() => setItem('prioridad', 'Baja')}>{lowPriority()}</Button>
             </div>
         </div>),
-
-        // (<div key={4} className="form-view">
-        //     <h2>4. ¿En qué estado se encuentra el equipo?</h2>
-        //     <div className="option-boxes-div">
-        //         <Button className={"priority-button"}>{activeMed()} </Button>
-        //         <Button className={"priority-button"}>{inactiveMed()}</Button>
-        //     </div>
-        // </div>),
 
         (<div key={4} className="form-view">
             <h3>4. Escriba una descripción del reporte agregando más detalles</h3>

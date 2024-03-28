@@ -13,7 +13,8 @@ export const getItem = (key) => {
 };
 
 export const getToken = () => {
-    return localStorage.getItem("token");
+    const token = localStorage.getItem('token');
+    return JSON.parse(token);
 }
 
 export const removeItem = (key) => {

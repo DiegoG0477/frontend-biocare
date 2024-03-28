@@ -1,30 +1,36 @@
+import {useEffect, useState} from "react";
 import "../styles/Dashboard-Home.css";
 import { Link } from 'react-router-dom';
-import {useEffect, useState} from "react";
+import { getUsers } from "../services/api/usersService.js";
+import { getAllMedEquipment } from "../services/api/medEquipmentService.js";
+import { getReports } from "../services/api/reportService.js";
 import DashboardBox from "../components/DashboardBox.jsx";
 import InventarioUsuarios from "../components/InventarioUsuarios.jsx";
+import EquiposMed from "../components/EquiposMed.jsx";
 import {Button} from "primereact/button";
 import Reportes from "../components/Reportes.jsx";
 
 
 export const Menu = () => {
+    const [reports, setReports] = useState([]);
+    const [users, setUsers] = useState([]);
+    const [medicalEquipment, setMedicalEquipment] = useState([]);
+    const [children, setChildren] = useState(null);
 
     useEffect(()=>{
-        (async() => {
-            fetch('http://localhost:4000/usuarios')
-                .then(r => r.json())
-                .then(r => setUsers(r))
-        })();
-        (async() => {
-            fetch('http://localhost:4000/reportes')
-                .then(r => r.json())
-                .then(r => setReports(r))
-        })();
-    }, [])
+        const fetchData = async () => {
+            const userData = await getUsers();
+            setUsers(userData);
 
-    const [reports, setReports] = useState([])
-    const [users, setUsers] = useState([])
-    const [children, setChildren] = useState(null)
+            const medEquipmentData = await getAllMedEquipment();
+            setMedicalEquipment(medEquipmentData);
+
+            const reportsData = await getReports();
+            setReports(reportsData);
+        }
+
+        fetchData();
+    }, [])
 
     return (
         <div>
@@ -44,21 +50,27 @@ export const Menu = () => {
                             </Button>
                         </li>
                         <li>
-                            <Button style={{backgroundColor:"white", color:'grey', margin:"auto"}} onClick={()=>{setChildren(<InventarioUsuarios/>)}}>
+                            <Button style={{backgroundColor:"white", color:'grey', margin:"auto"}} onClick={()=>{setChildren(<InventarioUsuarios users={users}/>)}}>
                                     <i className="uil uil-user-square"></i>
                                     <span className="link-name">Usuarios</span>
                             </Button>
                         </li>
                         <li>
-                            <Button style={{backgroundColor:"white", color:'grey', margin: "auto"}} onClick={()=>{setChildren(<Reportes/>)}}>
+                            <Button style={{backgroundColor:"white", color:'grey', margin: "auto"}} onClick={()=>{setChildren(<Reportes reports={reports}/>)}}>
                                 <i className="uil uil-notes"></i>
                                 <span className="link-name">Reportes</span>
                             </Button>
                         </li>
                         <li>
+                            <Button style={{backgroundColor:"white", color:'grey', margin: "auto"}} onClick={()=>{setChildren(<EquiposMed medEquipments={medicalEquipment}/>)}}>
+                                <i className="uil uil-monitor-heart-rate"></i>
+                                <span className="link-name">Equipos Médicos</span>
+                            </Button>
+                        </li>
+                        <li>
                             <Link to="/registrar-equipo">
                                     <i className="uil uil-monitor-heart-rate"></i>
-                                    <span className="link-name">Equipos Médicos</span>
+                                    <span className="link-name">Registrar Equipo</span>
                             </Link>
                         </li>
                     </ul>
@@ -99,8 +111,9 @@ export const Menu = () => {
                             <span className="text">Panel de Control</span>
                         </div>
                         <div className="boxes">
-                            <DashboardBox nombre={'Reportes'} cantidad={reports.length} styleSheet={'box1'}/>
-                            <DashboardBox nombre={'Usuarios'} cantidad={users.length} styleSheet={'box2'}/>
+                            <DashboardBox nombre={'Reportes'} cantidad={reports.length} styleSheet={'box1'} uiIcon='uil uil-file-graph'/>
+                            <DashboardBox nombre={'Usuarios'} cantidad={users.length} styleSheet={'box2'} uiIcon='uil uil-users-alt'/>
+                            <DashboardBox nombre={'Equipos'} cantidad={medicalEquipment.length} styleSheet={'box3'} uiIcon='uil uil-monitor-heart-rate'/>
                         </div>
                     </div>
                 </div>

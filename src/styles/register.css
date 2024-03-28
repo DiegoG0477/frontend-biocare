@@ -34,3 +34,11 @@
     margin: auto;
     display: flex;
 }
+
+#submit-equipo{
+    margin-left: 3em;
+}
+
+.form-select{
+    max-width: 62%;
+}

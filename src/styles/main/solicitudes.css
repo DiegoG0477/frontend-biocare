@@ -214,3 +214,15 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
+.mantenimiento-select{
+    margin-top: 5em;
+    background: #457B9D;
+    color: white;
+    padding: 1em;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    width: 50%;
+    text-align: center;
+}

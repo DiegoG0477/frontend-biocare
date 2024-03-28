@@ -345,8 +345,8 @@ nav.close ~ .dashboard .top{
     align-items: center;
     border-radius: 12px;
     width: calc(100% / 3 - 15px);
-    max-width: 300px; /* Establecer un ancho máximo */ 
-    max-height: 200px; /* Establecer un largo máximo */ 
+    max-width: 15em; /* Establecer un ancho máximo */ 
+    max-height: 10em; /* Establecer un largo máximo */ 
     padding: 15px 20px;
     background-color: var(--box1-color);
     transition: var(--tran-05);
@@ -354,19 +354,19 @@ nav.close ~ .dashboard .top{
 }
 
 .boxes .box i{
-    font-size: 35px;
+    font-size: 1.8em;
     color: var(--text-color);
 }
 
 .boxes .box .text{
     white-space: nowrap;
-    font-size: 18px;
+    font-size: 1.2em;
     font-weight: 500;
     color: var(--text-color);
 }
 
 .boxes .box .number{
-    font-size: 40px;
+    font-size: 2em;
     font-weight: 500;
     color: var(--text-color);
 }
