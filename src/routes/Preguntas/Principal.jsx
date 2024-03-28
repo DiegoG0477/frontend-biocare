@@ -37,11 +37,7 @@ export const Principal = () => {
         setItem("descripcion", descripcion);
         await sendReport(selection);
 
-        const lastReportId = await getLastPdfId();
-
         handleNavRefreshTo("/main");
-
-        handleNewTabTo("http://localhost:4000/reportes/pdf/" + lastReportId);
     }
     
 
