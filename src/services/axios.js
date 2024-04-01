@@ -3,7 +3,9 @@ import { getToken } from "./storage/localStorageService";
 
 const apiGet = async (url) => {
     try {
-        const token = getToken();
+        const token = getToken({ data: false });
+
+        console.log(token);
 
         const response = await axios.get(url, {
             headers: {
@@ -18,7 +20,7 @@ const apiGet = async (url) => {
 
 const apiGetDocument = async (url) => {
     try {
-        const token = getToken();
+        const token = getToken({ data: false });
 
         const response = await axios.get(url, {
             headers: {
@@ -40,7 +42,7 @@ const apiPost = async (url, data) => {
             return response;
         }
 
-        const token = getToken();
+        const token = getToken({ data: false });
 
         const response = await axios.post(url, data, {
             headers: {

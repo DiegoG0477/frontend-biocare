@@ -1,38 +1,55 @@
 import { apiPost, apiGet } from "../axios";
-import { getItem, setItem, clearStorage, getToken } from "../storage/localStorageService";
+import { getItem, setItem, clearStorage, getToken, removeItem } from "../storage/localStorageService";
 
 export const sendReport = async (reportType) => {
     const prioridad = getItem('prioridad');
     let prioridadId;
 
-    if (prioridad === 'Alta') {
-        prioridadId = 3;
-    } else if (prioridad === 'Media') {
-        prioridadId = 2;
-    } else if(prioridad === 'Baja'){ //prioridad Baja
-        prioridadId = 1;
-    } else {
-        prioridadId = 5; //No aplica
+    switch (prioridad) {
+        case 'Alta':
+            prioridadId = 3;
+            break;
+        case 'Media':
+            prioridadId = 2;
+            break;
+        case 'Baja':
+            prioridadId = 1;
+            break;
+        default:
+            prioridadId = 5;
+            break;
     }
 
     const data = {
         idTipoReporte: reportType,
         prioridadId,
-        descripcion: getItem('descripcion'),
+        descripcion: getItem('descripcion') || 'No aplica',
         area: getItem('areaSolicitante') || 'No aplica',
         consumible: getItem('consumibleSolicitado') || 'No aplica',
         falloReportado: getItem('falloReportado') || 'No aplica',
         estado: getItem('estado') || 'No aplica',
         equipoReportado: getItem('equipoReportado') || 'No aplica',
         capacitacionSolicitada: getItem('capacitacionSolicitada') || 'No aplica',
+        imgData: getItem('dataImg') || 'No aplica',
     };
 
-    const token = getToken();
+    console.log(data);
+
     await apiPost("http://localhost:4000/reportes", data);
 
-    clearStorage();
+    const itemsToRemove = [
+        'descripcion',
+        'areaSolicitante',
+        'consumibleSolicitado',
+        'falloReportado',
+        'estado',
+        'equipoReportado',
+        'capacitacionSolicitada',
+        'dataImg',
+        'prioridad',
+    ];
 
-    setItem('token', token);
+    itemsToRemove.forEach(item => removeItem(item));
 };
 
 export const getReports = async () => {

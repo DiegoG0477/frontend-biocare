@@ -7,8 +7,8 @@ import { getReports } from "../services/api/reportService.js";
 import DashboardBox from "../components/DashboardBox.jsx";
 import InventarioUsuarios from "../components/InventarioUsuarios.jsx";
 import EquiposMed from "../components/EquiposMed.jsx";
-import {Button} from "primereact/button";
 import Reportes from "../components/Reportes.jsx";
+import { clearStorage } from "../services/storage/localStorageService.js";
 
 
 export const Menu = () => {
@@ -32,9 +32,32 @@ export const Menu = () => {
         fetchData();
     }, [])
 
+    const switchSideBar = () => {
+        const sidebar = document.querySelector('.sideBar');
+        const dashboard = document.querySelector('.dashboard');
+        sidebar.classList.toggle('active');
+        sidebar.classList.toggle('hidden');
+        dashboard.classList.toggle('active');
+        dashboard.classList.toggle('sidebar-open');
+    };
+
+    const switchTheme = () => {
+        console.log('Cambiando tema...');
+        const body = document.querySelector('body');
+
+        const isDarkMode = body.classList.contains('dark');
+    
+        if (isDarkMode) {
+            body.classList.remove('dark');
+        } else {
+            body.classList.add('dark');
+        }
+    };
+    
+
     return (
         <div>
-            <nav>
+            <nav className="sideBar">
                 <div className="logo-name">
                     <div className="logo-image">
                         <img src="../assets/biocare.ico" alt="" />
@@ -44,28 +67,29 @@ export const Menu = () => {
                 <div className="menu-items">
                     <ul className="nav-links">
                         <li>
-                            <Button style={{backgroundColor:"white", color:'grey', margin: "auto"}} onClick={()=>{setChildren(null)}}>
+                        {/* style={{backgroundColor:"white", color:'grey', margin: "auto"}} */}
+                            <Link onClick={()=>{setChildren(null)}}>
                                     <i className="uil uil-estate"></i>
                                     <span className="link-name">Dashboard</span>
-                            </Button>
+                            </Link>
                         </li>
                         <li>
-                            <Button style={{backgroundColor:"white", color:'grey', margin:"auto"}} onClick={()=>{setChildren(<InventarioUsuarios users={users}/>)}}>
+                            <Link onClick={()=>{setChildren(<InventarioUsuarios users={users}/>)}}>
                                     <i className="uil uil-user-square"></i>
                                     <span className="link-name">Usuarios</span>
-                            </Button>
+                            </Link>
                         </li>
                         <li>
-                            <Button style={{backgroundColor:"white", color:'grey', margin: "auto"}} onClick={()=>{setChildren(<Reportes reports={reports}/>)}}>
+                            <Link onClick={()=>{setChildren(<Reportes reports={reports}/>)}}>
                                 <i className="uil uil-notes"></i>
                                 <span className="link-name">Reportes</span>
-                            </Button>
+                            </Link>
                         </li>
                         <li>
-                            <Button style={{backgroundColor:"white", color:'grey', margin: "auto"}} onClick={()=>{setChildren(<EquiposMed medEquipments={medicalEquipment}/>)}}>
+                            <Link onClick={()=>{setChildren(<EquiposMed medEquipments={medicalEquipment}/>)}}>
                                 <i className="uil uil-monitor-heart-rate"></i>
                                 <span className="link-name">Equipos Médicos</span>
-                            </Button>
+                            </Link>
                         </li>
                         <li>
                             <Link to="/registrar-equipo">
@@ -77,16 +101,16 @@ export const Menu = () => {
 
                     <ul className="logout-mod">
                         <li>
-                            <Link to="/">
+                            <Link to="/" onClick={clearStorage}>
                                 <i className="uil uil-signout"></i>
                                 <span className="link-name">Salir</span>
                             </Link>
                         </li>
                         <li className="mode-toggle">
-                            <a href="#">
+                            <Link to="#" onClick={switchTheme}>
                                 <i className="uil uil-moon"></i>
                                 <span className="link-name">Dark Mode</span>
-                            </a>
+                            </Link>
                             <div className="mode-toggle">
                                 <span className="switch"></span>
                             </div>
@@ -94,9 +118,11 @@ export const Menu = () => {
                     </ul>
                 </div>
             </nav>
+
             <section className="dashboard">
                 <div className="top">
-                    <i className="uil uil-bars sidebar-toggle"></i>
+                    <i className="uil uil-bars sidebar-toggle" onClick={switchSideBar}></i>
+
                     <div className="search-box">
                         <i className="uil uil-search"></i>
                         <input type="text" placeholder="Buscar..." />

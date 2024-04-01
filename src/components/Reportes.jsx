@@ -38,14 +38,14 @@ export default function Reportes({reports}){
             <h2 style={{marginTop:'2rem', marginLeft:'35rem'}}>Reportes</h2>
             <div style={{margin: "auto", justifyContent:"space-around", width:'fit-content'}}>
                 <DataTable onCellClick={downloadReport} value={reports} tableStyle={{minWidth:'60em', textAlign:'center'}} paginator rows={20} paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown">
-                    <Column field={'id'} header={"ID"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px'}}/>
-                    <Column field={'usuario'} header={"Usuario"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}}/>
-                    <Column field={'fecha'} body={dateTemplate} header={"Fecha"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}}/>
-                    <Column field={'descripcion'} header={"Descripcion"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}}/>
-                    <Column field={'tipo'} header={"Tipo"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}}/>
-                    <Column field={'area'} header={"Area"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}}/>
-                    <Column field={'prioridad'} header={"Prioridad"} body={priorityTemplate} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}}  />
-                    <Column body={downloadButtonTemplate} headerStyle={{backgroundColor:'#1D3557', color:"white",width: '20%', padding:' 10px 0 10px 0'}} header={'Descargar Reporte'}></Column>
+                    <Column field={'id'} header={"ID"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px'}} bodyStyle={{paddingTop: '20px'}}/>
+                    <Column field={'usuario'} header={"Usuario"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}} bodyStyle={{paddingTop: '20px'}}/>
+                    <Column field={'fecha'} body={dateTemplate} header={"Fecha"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}} bodyStyle={{paddingTop: '20px'}}/>
+                    <Column field={'descripcion'} header={"Descripcion"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}} bodyStyle={{paddingTop: '20px'}}/>
+                    <Column field={'tipo'} header={"Tipo"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}} bodyStyle={{paddingTop: '20px'}}/>
+                    <Column field={'area'} header={"Area"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}} bodyStyle={{paddingTop: '20px'}}/>
+                    <Column field={'prioridad'} header={"Prioridad"} body={priorityTemplate} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}}   bodyStyle={{paddingTop: '20px'}}/>
+                    <Column body={downloadButtonTemplate} headerStyle={{backgroundColor:'#1D3557', color:"white",width: '20%', padding:' 10px 0 10px 0'}} header={'Descargar Reporte'} bodyStyle={{paddingTop: '20px'}}></Column>
                 </DataTable>
             </div>
         </div>

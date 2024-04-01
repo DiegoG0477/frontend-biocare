@@ -16,6 +16,11 @@ export default function AreaCapacitacion({ page, setCantPages, setDescripcion })
         return setDescripcion(value);
     }
 
+    const setData = (name, img) => {
+        setItem('capacitacionSolicitada', name);
+        setItem('dataImg', img);
+    }
+
     const capacitacionesViews = [
         (<div key={1} className="form-view">
             <h2>1. ¿En qué área se solicita la capacitación?</h2>
@@ -38,7 +43,7 @@ export default function AreaCapacitacion({ page, setCantPages, setDescripcion })
             <h2>2. ¿Qué tipo de capacitación necesita?</h2>
             <div className="option-boxes-div">
                 {capacitacionesList.map((capacitacion) => (
-                    <IconDataCard key={capacitacion.key} img={capacitacion.img} name={capacitacion.name} onClick={() => setItem('capacitacionSolicitada', capacitacion.name)} />
+                    <IconDataCard key={capacitacion.key} img={capacitacion.img} name={capacitacion.name} onClick={() => setData(capacitacion.name, capacitacion.img)} />
                 ))}
             </div>
         </div>),

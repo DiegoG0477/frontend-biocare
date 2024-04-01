@@ -5,9 +5,19 @@ const login = async (data) => {
   try {
     const response = await apiPost("http://localhost:4000/auth/login", data);
     
+    // if (response.data) {
+    //     setToken(response.data.token);
+    // }
+
     if (response.data) {
-        setToken(response.data.token);
-    }
+      const now = new Date();
+
+      const item = {
+          token: response.data.token,
+          expiry: now.getTime() + 24 * 60 * 60 * 1000, // 24 horas en milisegundos
+      }
+      setToken(item);
+  }
     
     return response;
   } catch (error) {

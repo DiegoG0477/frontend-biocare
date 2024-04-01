@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { Menu } from './routes/Dashboard-Home.jsx';
 import { Principal } from './routes/Preguntas/Principal.jsx';
+import ProtectedRoute from './services/auth/ProtectedRoute.jsx';
 import Home from './layout/Home.jsx';
 import LoginForm from "./components/LoginForm.jsx";
 import RegisterForm from "./components/RegisterForm.jsx";
@@ -19,16 +20,25 @@ function App() {
             <Route path='/' element={<Home><LoginForm/></Home>}/>
             <Route path='/registrar' element={<Home><RegisterForm/></Home>} />
             <Route path='/recuperar-password' element={<Home> <ForgottenPasswordForm/> </Home>} />
-            <Route path='/registrar-equipo' element={<Home> <EquiposMedicosForm/> </Home>} />
-            {/*ADMIN ROUTES*/}
-            <Route path='/dashboard' element={<Menu />} />
-            <Route path='/users' element={<InventarioUsuarios />} />
-            {/*<Route path='/equipos' element={<InventarioEquipos />} />*/}
-            <Route path='/reportes' element={<Reportes />} />
-            {/*USER ROUTES*/}
-            <Route path={'/main'} element={<DefaultLayout> <Principal/>  </DefaultLayout>}/>
-            <Route path={'/ayuda'} element={<Ayuda />}/>
-            <Route path={'/sos'} element={<Emergencia />}/>
+            
+            <Route element={<ProtectedRoute pagePermission="admin" />}>
+                {/*ADMIN ROUTES*/}
+                <Route path='/dashboard' element={<Menu />} />
+                <Route path='/users' element={<InventarioUsuarios />} />
+                <Route path='/registrar-equipo' element={<Home> <EquiposMedicosForm/> </Home>} />
+                {/*<Route path='/equipos' element={<InventarioEquipos />} />*/}
+                <Route path='/reportes' element={<Reportes />} />
+            </Route>
+
+
+            <Route element={<ProtectedRoute pagePermission="user" />}>
+                {/*USER ROUTES*/}
+                <Route path={'/main'} element={<DefaultLayout> <Principal/>  </DefaultLayout>}/>
+                <Route path={'/ayuda'} element={<Ayuda />}/>
+                <Route path={'/sos'} element={<Emergencia />}/>
+            </Route>
+
+            
         </Routes>
     )
 }

@@ -13,14 +13,16 @@ export default function EquiposMed({medEquipments}){
             <h2 style={{marginTop:'2rem', marginLeft:'35rem'}}>Equipos Médicos</h2>
             <div style={{margin: "auto", justifyContent:"space-around", width:'fit-content'}}>
                 <DataTable value={medEquipments} tableStyle={{minWidth:'55em', textAlign:'center'}}  paginator rows={20} paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown">
-                    <Column field={'no_inventario'} header={"No.Inventario"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px '}}/>
-                    <Column field={'nombre'} header={"Nombre"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}}/>
-                    <Column field={'marca'} header={"Marca"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}}/>
-                    <Column field={'modelo'} header={"Modelo"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}}/>
-                    <Column field={'descripcion'} header={"Descripción"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}}/>
-                    <Column field={'fecha_instalacion'} body={dateTemplate} header={"Fecha Instalación"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}}/>
-                    <Column field={'area'} header={"Area"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}}/>
-                    <Column field={'tipoEquipo'} header={"Tipo"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}}/>
+                    
+
+                    <Column field={'no_inventario'} header={"No.Inventario"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px',}} bodyStyle={{paddingTop: '20px'}}/>
+                    <Column field={'nombre'} header={"Nombre"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}} bodyStyle={{paddingTop: '20px'}}/>
+                    <Column field={'marca'} header={"Marca"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}} bodyStyle={{paddingTop: '20px'}}/>
+                    <Column field={'modelo'} header={"Modelo"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}} bodyStyle={{paddingTop: '20px'}}/>
+                    {/* <Column field={'descripcion'} header={"Descripción"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}}/> */}
+                    <Column field={'fecha_instalacion'} body={dateTemplate} header={"Fecha Instalación"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}} bodyStyle={{marginTop: '10px'}}/>
+                    <Column field={'area'} header={"Area"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}} bodyStyle={{paddingTop: '20px'}}/>
+                    <Column field={'tipo'} header={"Tipo"} headerStyle={{backgroundColor:'#1D3557', color:"white", padding:' 10px 0 10px 0'}} bodyStyle={{paddingTop: '20px'}}/>
                 </DataTable>
             </div>
 

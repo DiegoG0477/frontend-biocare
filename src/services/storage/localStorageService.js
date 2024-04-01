@@ -3,8 +3,8 @@ export const setItem = (key, value) => {
 };
 
 export const setToken = (token) => {
-    console.log(token);
-    localStorage.setItem("token", `"${token}"`);
+    // localStorage.setItem("token_session", `"${token}"`);
+    localStorage.setItem("token_session", JSON.stringify(token));
 }
 
 export const getItem = (key) => {
@@ -12,9 +12,13 @@ export const getItem = (key) => {
     return value ? JSON.parse(value) : null;
 };
 
-export const getToken = () => {
-    const token = localStorage.getItem('token');
-    return JSON.parse(token);
+export const getToken = ({data}) => {
+    const token = localStorage.getItem('token_session');
+    if (!token) {
+        return null;
+    }
+    if(data) return JSON.parse(token);
+    else return JSON.parse(token).token;
 }
 
 export const removeItem = (key) => {

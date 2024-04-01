@@ -25,12 +25,15 @@ export default function AreaBoxes({ page, setCantPages, setDescripcion }) {
         return setDescripcion(value);
     }
 
-    const handleGetMedEquipment = async (typeEquipment) => {
+    const handleGetMedEquipment = async (typeEquipment, img) => {
         const equiposArea = await getMedEquipmentByAreaAndType(getItem('areaSolicitante'), typeEquipment);
 
         setItem('equiposArea', equiposArea);
 
         setInventoryNumber(getItem('equiposArea'));
+
+        setData(img);
+
         console.log("inventoryNumber", inventoryNumber);
     }
 
@@ -43,6 +46,10 @@ export default function AreaBoxes({ page, setCantPages, setDescripcion }) {
                 <p>{'ALTA'}</p>
             </>
         )
+    }
+
+    const setData = (img) => {
+        setItem('dataImg', img);
     }
 
     const medPriority = () => {
@@ -138,7 +145,7 @@ export default function AreaBoxes({ page, setCantPages, setDescripcion }) {
             <h2>2. ¿Qué tipo de equipo médico desea reportar?</h2>
             <div className="equipos-list">
                 {medEquiposList.map((equipo) => (
-                    <IconDataCard key={equipo.key} img={equipo.img} name={equipo.name} onClick={() => handleGetMedEquipment(equipo.name)} />
+                    <IconDataCard key={equipo.key} img={equipo.img} name={equipo.name} onClick={() => handleGetMedEquipment(equipo.name, equipo.img)} />
                 ))}
             </div>
         </div>),

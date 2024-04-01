@@ -58,6 +58,11 @@ export default function Consumibles({ page, setCantPages, setDescripcion }) {
         );
     };
 
+    const setData = (name, img) => {
+        setItem('consumibleSolicitado', name);
+        setItem('dataImg', img);
+    }
+
     // la logica sera la siguiente
     // manejar un useState de las id's de los divs dependiendo de cada pantalla
     //cada div, tendra un id que sera modificado desde el componente padre cuando
@@ -80,7 +85,7 @@ export default function Consumibles({ page, setCantPages, setDescripcion }) {
                 ) : (
                     <div className="option-boxes-div">
                         {consumiblesList.map((consumible) => (
-                            <IconDataCard key={consumible.key} img={consumible.img} name={consumible.name} onClick={() => setItem('consumibleSolicitado', consumible.name)} />
+                            <IconDataCard key={consumible.key} img={consumible.img} name={consumible.name} onClick={() => setData(consumible.name, consumible.img)} />
                         ))}
                     </div>
                 )}

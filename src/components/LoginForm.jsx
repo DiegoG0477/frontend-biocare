@@ -1,12 +1,13 @@
 import useCustomNav from "../helpers/hooks/useCustomNav";
 import "../styles/login.css";
 import { useState } from "react";
+import { setItem } from "../services/storage/localStorageService";
 import { login } from "../services/auth/authService";
 
 export default function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { handleNavTo } = useCustomNav();
+    const { handleNavRefreshTo } = useCustomNav();
 
     const handleLogin = async () => {
         const data = {
@@ -18,8 +19,15 @@ export default function LoginForm() {
 
         if (response) {
             console.log(response);
+            console.log(response.data.signedRole);
 
-            handleNavTo("/main");
+            setItem("role_session", response.data.signedRole);
+
+            if (response.data.rol === "admin") {
+                handleNavRefreshTo("/dashboard");
+            } else {
+                handleNavRefreshTo("/main");
+            }
         }
     }
 
