@@ -7,7 +7,7 @@ import { login } from "../services/auth/authService";
 export default function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { handleNavRefreshTo } = useCustomNav();
+    const { handleNavRefreshTo, handleNavTo } = useCustomNav();
 
     const handleLogin = async () => {
         const data = {
