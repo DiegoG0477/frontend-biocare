@@ -3,10 +3,10 @@ import useCustomNav from "../../helpers/hooks/useCustomNav.js";
 import { Button } from "primereact/button";
 import "../../styles/main/solicitudes.css";
 import { sendReport } from "../../services/api/reportService.js";
-import { setItem, removeItem } from "../../services/storage/localStorageService.js";
+import { setItem, removeItem, getItem } from "../../services/storage/localStorageService.js";
 import BoxContainer from "../../components/BoxContainer.jsx";
 import MainBox from "../../components/Boxes/Main.jsx";
-import SOSButton from "../../components/SOSButton.jsx";
+// import SOSButton from "../../components/SOSButton.jsx";
 
 export const Principal = () => {
     const [selection, setSelection] = useState(null);
@@ -14,6 +14,7 @@ export const Principal = () => {
     const [formPage, setFormPage] = useState(1);
     const [cantPages, setCantPages] = useState(2);
     const [descripcion, setDescripcion] = useState("");
+    const [userName, setUserName] = useState("");
 
     const { handleNavRefreshTo } = useCustomNav();
 
@@ -42,12 +43,14 @@ export const Principal = () => {
         itemsToRemove.forEach(item => removeItem(item));
         setSelection(null);
         setFormPage(1);
+        setTitle("Solicitudes");
     }
 
     const sendReportToApi = async () => {
         setItem("descripcion", descripcion);
         await sendReport(selection);
 
+        setTitle("Solicitudes");
         handleNavRefreshTo("/main");
     }
 
@@ -57,11 +60,19 @@ export const Principal = () => {
         if (selection === 3) setTitle("Capacitacion");
     }, [selection]);
 
+    useEffect(() => {
+        const user = getItem("usuario");
+        setUserName(user);
+    }, []);
+
+
+
     return (
         <>
             <div className="contenedor">
                 <div className="encabezado">
                     <h1 className="title">{title}</h1>
+                    <h2 className="title">Bienvenido {userName}</h2>
                     {selection ? (
                         <MainBox
                             selectedOption={selection}

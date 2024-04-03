@@ -9,10 +9,8 @@
     border-radius:20px;
 }
 
-.form-view{
-    h2{
-        font-weight: bold;
-    }
+.form-view h2{
+    font-weight: bold;
 }
 
 .option-boxes-div{
@@ -167,10 +165,6 @@
 
     margin: 1em;
 
-    img{
-        height: 9em;
-    }
-
     .text-box{
         background: #D9D9D9;
         margin-top: 0.5em;
@@ -178,6 +172,10 @@
         width: 13em;
         border-radius: 0 0 20px 20px;
     }
+}
+
+.icon-data-card img{
+    height: 9em;
 }
 
 .icon-data-card:focus{

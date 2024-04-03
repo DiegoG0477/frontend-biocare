@@ -1,5 +1,5 @@
 import { apiPost } from "../axios";
-import { setToken } from "../storage/localStorageService";
+import { setToken, setItem } from "../storage/localStorageService";
 
 const login = async (data) => {
   try {
@@ -17,6 +17,8 @@ const login = async (data) => {
           expiry: now.getTime() + 24 * 60 * 60 * 1000, // 24 horas en milisegundos
       }
       setToken(item);
+
+      setItem("usuario", `${response.data.usuario.nombre} ${response.data.usuario.apellido}`);
   }
     
     return response;

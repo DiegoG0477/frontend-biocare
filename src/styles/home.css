@@ -6,7 +6,7 @@
 .non-user-container{
     align-items: stretch;
     background: round;
-    background-image: url("./src/assets/img/fondoLogin.png");
+    background-image: url("../assets/img/fondoLogin.png");
     display: flex;
     justify-content: stretch;
     min-height: 100vh;
@@ -14,6 +14,7 @@
     background-color: #3A3B3C;
     background-blend-mode: overlay;
 }
+
 #logo-container {
     background-color: rgba(10, 34, 98, 0.33);
     align-content: center;

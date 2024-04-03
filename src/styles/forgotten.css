@@ -1,6 +1,6 @@
 .forgot-container {
     background: round;
-    background-image: url("./src/assets/img/fondoLogin.png");
+    background-image: url("../assets/img/fondoLogin.png");
     display: flex;
     justify-content: stretch;
     height: 100vh;
@@ -21,7 +21,7 @@
 }
 
 #logo {
-    image: url("./src/assets/img/logoBiocare.png");
+    background-image: url("../assets/img/logoBiocare.png");
     margin: auto;
     display: flex;
 }
@@ -35,7 +35,7 @@
 
 #title-forgot {
     font-size: 50px;
-    font-family: "Arial Black";
+    font-family: "Arial Black", Arial, sans-serif;
 }
 
 .forgot-form {
