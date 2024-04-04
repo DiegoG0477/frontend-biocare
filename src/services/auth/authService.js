@@ -3,7 +3,7 @@ import { setToken, setItem } from "../storage/localStorageService";
 
 const login = async (data) => {
   try {
-    const response = await apiPost("http://localhost:4000/auth/login", data);
+    const response = await apiPost("https://biocare.freemyip.com/api/auth/login", data);
     
     // if (response.data) {
     //     setToken(response.data.token);
@@ -30,7 +30,7 @@ const login = async (data) => {
 
 const register = async (data) => {
     try {
-        const response = await apiPost("http://localhost:4000/auth/registro", data);
+        const response = await apiPost("https://biocare.freemyip.com/api/auth/registro", data);
         return response;
     } catch (error) {
         console.error(error);
