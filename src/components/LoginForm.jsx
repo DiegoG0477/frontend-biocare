@@ -60,8 +60,8 @@ export default function LoginForm() {
 
             <div className={"buttons"}>
                 <button
-                    id={"signin"}
-                    type={"submit"}
+                    // id={"signin"}
+                    // type={"submit"}
                     onClick={() => {
                         handleLogin();
                     }}
