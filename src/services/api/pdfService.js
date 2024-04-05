@@ -1,12 +1,12 @@
 import { apiGet, apiGetDocument } from "../axios";
 
 export const getLastPdfId = async () => {
-    const response = await apiGet("https://biocare.freemyip.com/api/reportes/pdf/last");
+    const response = await apiGet("/reportes/pdf/last");
     return response.data;
 }
 
 export const downloadReport = async (data) => {
-    const pdfReport = await apiGetDocument(`https://biocare.freemyip.com/api/reportes/pdf/${data.id}`);
+    const pdfReport = await apiGetDocument(`/reportes/pdf/${data.id}`);
 
     try {
         const blob = pdfReport.data; // Aquí cambiamos res.blob() por pdfReport.data

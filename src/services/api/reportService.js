@@ -35,7 +35,7 @@ export const sendReport = async (reportType) => {
 
     console.log(data);
 
-    await apiPost("https://biocare.freemyip.com/api/reportes", data);
+    await apiPost("/reportes", data);
 
     const itemsToRemove = [
         'descripcion',
@@ -53,6 +53,6 @@ export const sendReport = async (reportType) => {
 };
 
 export const getReports = async () => {
-    const response = await apiGet('https://biocare.freemyip.com/api/reportes');
+    const response = await apiGet('/reportes');
     return response;
 }

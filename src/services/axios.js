@@ -1,13 +1,15 @@
 import axios from "axios";
 import { getToken } from "./storage/localStorageService";
 
-const apiGet = async (url) => {
+const apiUrl = import.meta.env.VITE_API_URL;
+
+const apiGet = async (endpoint) => {
     try {
         const token = getToken({ data: false });
 
         console.log(token);
 
-        const response = await axios.get(url, {
+        const response = await axios.get(`${apiUrl}${endpoint}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -18,11 +20,11 @@ const apiGet = async (url) => {
     }
 };
 
-const apiGetDocument = async (url) => {
+const apiGetDocument = async (endpoint) => {
     try {
         const token = getToken({ data: false });
 
-        const response = await axios.get(url, {
+        const response = await axios.get(`${apiUrl}${endpoint}`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/pdf'
@@ -35,16 +37,16 @@ const apiGetDocument = async (url) => {
     }
 }
 
-const apiPost = async (url, data) => {
+const apiPost = async (endpoint, data) => {
     try {
-        if (url === "http://localhost:4000/auth/login" || url === "http://localhost:4000/auth/registro") {
-            const response = await axios.post(url, data);
+        if (endpoint === "/auth/login" || endpoint === "/auth/registro") {
+            const response = await axios.post(`${apiUrl}${endpoint}`, data);
             return response;
         }
 
         const token = getToken({ data: false });
 
-        const response = await axios.post(url, data, {
+        const response = await axios.post(`${apiUrl}${endpoint}`, data, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -57,9 +59,9 @@ const apiPost = async (url, data) => {
     }
 };
 
-const apiPut = async (url, data, token) => {
+const apiPut = async (endpoint, data, token) => {
     try {
-        const response = await axios.put(url, data, {
+        const response = await axios.put(`${apiUrl}${endpoint}`, data, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -70,9 +72,9 @@ const apiPut = async (url, data, token) => {
     }
 };
 
-const apiDelete = async (url, token) => {
+const apiDelete = async (endpoint, token) => {
     try {
-        const response = await axios.delete(url, {
+        const response = await axios.delete(`${apiUrl}${endpoint}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
