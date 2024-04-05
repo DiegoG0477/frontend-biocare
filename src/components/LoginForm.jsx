@@ -60,8 +60,7 @@ export default function LoginForm() {
 
             <div className={"buttons"}>
                 <button
-                    // id={"signin"}
-                    // type={"submit"}
+                    id={"signin"}
                     onClick={() => {
                         handleLogin();
                     }}
@@ -70,6 +69,7 @@ export default function LoginForm() {
                 </button>
 
                 <button
+                    id={"signup"}
                     onClick={() => {
                         handleNavTo("/registrar");
                     }}
